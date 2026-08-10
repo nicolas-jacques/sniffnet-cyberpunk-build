@@ -1,0 +1,8 @@
+# Cyberpunk Futurista — Sniffnet custom theme
+# Deep space background with electric cyan, neon magenta and amber accents.
+primary = "#0a0e17"        # background color (deep space)
+secondary = "#00f0ff"      # header, footer, and incoming connections color (electric cyan)
+outgoing = "#ff2bd6"       # outgoing connections color (neon magenta)
+text_body = "#d7e5ff"      # body text color (ice white)
+text_headers = "#0a0e17"   # header and footer text color (deep space)
+starred = "#ffb800"        # favorites' star color (amber)

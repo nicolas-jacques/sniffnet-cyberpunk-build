@@ -2,6 +2,10 @@ use crate::gui::styles::custom_themes::a11y::{
     A11Y_DARK_PALETTE, A11Y_DARK_PALETTE_EXTENSION, A11Y_LIGHT_PALETTE,
     A11Y_LIGHT_PALETTE_EXTENSION,
 };
+use crate::gui::styles::custom_themes::cyberpunk::{
+    CYBERPUNK_DARK_PALETTE, CYBERPUNK_DARK_PALETTE_EXTENSION, CYBERPUNK_LIGHT_PALETTE,
+    CYBERPUNK_LIGHT_PALETTE_EXTENSION,
+};
 use crate::gui::styles::custom_themes::dracula::{
     DRACULA_DARK_PALETTE, DRACULA_DARK_PALETTE_EXTENSION, DRACULA_LIGHT_PALETTE,
     DRACULA_LIGHT_PALETTE_EXTENSION,
@@ -35,6 +39,8 @@ use std::fmt;
 #[allow(clippy::large_enum_variant)]
 pub enum StyleType {
     #[default]
+    CyberpunkDark,
+    CyberpunkLight,
     A11yDark,
     A11yLight,
     DraculaDark,
@@ -53,8 +59,8 @@ pub enum StyleType {
 impl Base for StyleType {
     fn default(preference: Mode) -> Self {
         match preference {
-            Mode::Light => Self::A11yLight,
-            _ => Self::A11yDark,
+            Mode::Light => Self::CyberpunkLight,
+            _ => Self::CyberpunkDark,
         }
     }
 
@@ -80,6 +86,8 @@ impl Base for StyleType {
 
     fn name(&self) -> &str {
         match self {
+            Self::CyberpunkDark => "Cyberpunk Dark",
+            Self::CyberpunkLight => "Cyberpunk Light",
             Self::A11yDark => "A11y Dark",
             Self::A11yLight => "A11y Light",
             Self::DraculaDark => "Dracula Dark",
@@ -101,6 +109,8 @@ impl StyleType {
     /// [`Palette`] of the [`StyleType`] variant
     pub fn get_palette(self) -> Palette {
         match self {
+            Self::CyberpunkDark => *CYBERPUNK_DARK_PALETTE,
+            Self::CyberpunkLight => *CYBERPUNK_LIGHT_PALETTE,
             Self::A11yDark => *A11Y_DARK_PALETTE,
             Self::A11yLight => *A11Y_LIGHT_PALETTE,
             Self::DraculaDark => *DRACULA_DARK_PALETTE,
@@ -120,6 +130,8 @@ impl StyleType {
     /// [`PaletteExtension`] of the [`StyleType`] variant
     pub fn get_extension(self) -> PaletteExtension {
         match self {
+            Self::CyberpunkDark => *CYBERPUNK_DARK_PALETTE_EXTENSION,
+            Self::CyberpunkLight => *CYBERPUNK_LIGHT_PALETTE_EXTENSION,
             Self::A11yDark => *A11Y_DARK_PALETTE_EXTENSION,
             Self::A11yLight => *A11Y_LIGHT_PALETTE_EXTENSION,
             Self::DraculaDark => *DRACULA_DARK_PALETTE_EXTENSION,
@@ -139,6 +151,8 @@ impl StyleType {
     /// Slice of all implemented custom styles
     pub const fn all_styles() -> &'static [Self] {
         &[
+            Self::CyberpunkDark,
+            Self::CyberpunkLight,
             Self::A11yDark,
             Self::A11yLight,
             Self::DraculaDark,
@@ -158,6 +172,7 @@ impl StyleType {
 impl fmt::Display for StyleType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match *self {
+            Self::CyberpunkDark | Self::CyberpunkLight => write!(f, "Cyberpunk"),
             Self::A11yLight | Self::A11yDark => write!(f, "A11y"),
             Self::DraculaLight | Self::DraculaDark => write!(f, "Dracula"),
             Self::GruvboxDark | Self::GruvboxLight => write!(f, "Gruvbox"),
