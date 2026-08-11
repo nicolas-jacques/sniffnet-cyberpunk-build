@@ -147,7 +147,6 @@ pub enum Message {
     /// Edit scale factor via keyboard shortcut
     ScaleFactorShortcut(bool),
     /// Set new release status
-    SetNewerReleaseStatus(Option<bool>),
     /// Set the pcap import path
     SetPcapImport(String),
     /// Sent by the backend parsing packets at the end of an offline capture; includes all the pending hosts

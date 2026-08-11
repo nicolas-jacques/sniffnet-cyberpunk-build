@@ -27,10 +27,9 @@ pub fn print_cli_welcome_message() {
         "\n\
 ╭────────────────────────────────────────────────────────────────────╮\n\
 │                                                                    │\n\
-│                           Sniffnet {ver}                           │\n\
+│                       Mad Dog Sniffer {ver}                       │\n\
 │                                                                    │\n\
-│           → Website: https://sniffnet.app                          │\n\
-│           → GitHub:  https://github.com/GyulyVGC/sniffnet          │\n\
+│           → Site: https://nicolasjacques.com                      │\n\
 │                                                                    │\n\
 ╰────────────────────────────────────────────────────────────────────╯\n\n"
     );

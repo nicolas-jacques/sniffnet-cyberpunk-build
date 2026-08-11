@@ -26,7 +26,6 @@ use crate::translations::translations_5::ip_blacklist_translation;
 use crate::utils::formatted_strings::get_path_termination_string;
 use crate::utils::types::file_info::FileInfo;
 use crate::utils::types::icon::Icon;
-use crate::utils::types::web_page::WebPage;
 use crate::{Language, Sniffer, StyleType};
 
 pub fn settings_general_page(sniffer: &Sniffer) -> Container<'_, Message, StyleType> {
@@ -133,7 +132,6 @@ fn language_picklist<'a>(language: Language) -> Container<'a, Message, StyleType
                         .size(15)
                         .line_height(LineHeight::Relative(1.0)),
                 )
-                .on_press(Message::OpenWebPage(WebPage::IssueLanguages))
                 .padding(2)
                 .height(20)
                 .width(20)
@@ -225,11 +223,10 @@ fn need_help<'a>(language: Language) -> Container<'a, Message, StyleType> {
                         .size(20)
                         .line_height(LineHeight::Relative(1.0)),
                 )
-                .on_press(Message::OpenWebPage(WebPage::Issues))
                 .padding(Padding::new(2.0).top(5))
                 .height(40)
                 .width(60),
-                row_open_link_tooltip("GitHub Issues"),
+                row_open_link_tooltip("nicolasjacques.com"),
                 Position::Right,
             )
             .gap(5)

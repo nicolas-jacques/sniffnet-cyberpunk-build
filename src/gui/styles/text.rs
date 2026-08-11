@@ -17,7 +17,6 @@ pub enum TextType {
     Title,
     Subtitle,
     Danger,
-    Sponsor,
     Welcome(f32),
     Dimmed,
 }
@@ -76,7 +75,7 @@ pub fn highlight(style: &StyleType, element: TextType) -> Color {
         }
         TextType::Incoming => colors.secondary,
         TextType::Outgoing => colors.outgoing,
-        TextType::Danger | TextType::Sponsor => ext.red_alert_color,
+        TextType::Danger => ext.red_alert_color,
         TextType::Standard => colors.text_body,
         TextType::Dimmed => Color {
             a: ext.alpha_chart_badge,

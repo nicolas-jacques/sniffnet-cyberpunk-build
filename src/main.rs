@@ -35,8 +35,8 @@ mod report;
 mod translations;
 mod utils;
 
-pub const SNIFFNET_LOWERCASE: &str = "sniffnet";
-pub const SNIFFNET_TITLECASE: &str = "Sniffnet";
+pub const SNIFFNET_LOWERCASE: &str = "mad_dog_sniffer";
+pub const SNIFFNET_TITLECASE: &str = "Mad Dog Sniffer";
 
 const WINDOW_ICON: &[u8] = include_bytes!("../resources/logos/raw/icon.png");
 

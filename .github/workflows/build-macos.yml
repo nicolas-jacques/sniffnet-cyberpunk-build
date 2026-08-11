@@ -1,14 +1,12 @@
-name: Build macOS (Sniffnet Cyberpunk)
+name: Build macOS (Mad Dog Sniffer)
 
-# Compila o Sniffnet (com tema Cyberpunk embutido) para macOS em runners
-# nativos da Apple — macOS não é cross-compilável a partir de Windows.
+# Compila o Mad Dog Sniffer para macOS em runners nativos da Apple —
+# macOS não é cross-compilável a partir de Windows.
 #
 # COMO USAR:
-#   1. Faça fork deste repositório no seu GitHub
-#   2. Faça push (o tema cyberpunk já está no código)
-#   3. Rode este workflow manualmente (Actions → Build macOS → Run workflow)
+#   1. Rode este workflow manualmente (Actions → Build macOS → Run workflow)
 #      ou crie uma tag v* para disparo automático
-#   4. Baixe os artefatos (binários macOS Intel + Apple Silicon)
+#   2. Baixe os artefatos (binários macOS Intel + Apple Silicon)
 
 on:
   workflow_dispatch:
@@ -47,17 +45,17 @@ jobs:
         # libpcap já vem no macOS — nenhuma dependência extra é necessária
         run: cargo build --release --target ${{ matrix.target }}
 
-      - name: Rename binary (cyberpunk)
+      - name: Rename binary (mad dog)
         run: |
           cp target/${{ matrix.target }}/release/sniffnet \
-             Sniffnet-Cyberpunk-${{ matrix.target }}
-          chmod +x Sniffnet-Cyberpunk-${{ matrix.target }}
+             MadDog-Sniffer-${{ matrix.target }}
+          chmod +x MadDog-Sniffer-${{ matrix.target }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: sniffnet-cyberpunk-${{ matrix.target }}
-          path: Sniffnet-Cyberpunk-${{ matrix.target }}
+          name: maddog-sniffer-${{ matrix.target }}
+          path: MadDog-Sniffer-${{ matrix.target }}
           if-no-files-found: error
 
   create-release:
@@ -76,5 +74,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            sniffnet-cyberpunk-*/*-apple-darwin
+            maddog-sniffer-*/*-apple-darwin
           generate_release_notes: true

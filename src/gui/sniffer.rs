@@ -52,7 +52,6 @@ use crate::report::get_report_entries::get_searched_entries;
 use crate::report::types::search_parameters::SearchParameters;
 use crate::report::types::sort_type::SortType;
 use crate::translations::types::language::Language;
-use crate::utils::check_updates::set_newer_release_status;
 use crate::utils::error_logger::{ErrorLogger, Location};
 use crate::utils::types::file_info::FileInfo;
 use crate::utils::types::icon::Icon;
@@ -101,8 +100,6 @@ pub struct Sniffer {
     pub addresses_resolved: HashMap<IpAddr, (String, Host)>,
     /// Log of the displayed notifications, with the total number of notifications for this capture
     pub logged_notifications: LoggedNotifications,
-    /// Reports if a newer release of the software is available on GitHub
-    pub newer_release_available: Option<bool>,
     /// Network device to be analyzed, or PCAP file to be imported
     pub capture_source: CaptureSource,
     /// Signals if a pcap error occurred
@@ -168,7 +165,6 @@ impl Sniffer {
             info_traffic: InfoTraffic::default(),
             addresses_resolved: HashMap::new(),
             logged_notifications: LoggedNotifications::default(),
-            newer_release_available: None,
             capture_source,
             pcap_error: None,
             dots_pulse: (".".to_string(), 0),
@@ -357,7 +353,6 @@ impl Sniffer {
             Message::CtrlTPressed => return self.ctrl_t_pressed(),
             Message::CtrlSpacePressed => self.ctrl_space_pressed(),
             Message::ScaleFactorShortcut(increase) => self.scale_factor_shortcut(increase),
-            Message::SetNewerReleaseStatus(status) => self.set_newer_release_status(status),
             Message::SetPcapImport(path) => self.set_pcap_import(path),
             Message::PendingHosts(cap_id, host_msgs) => self.pending_hosts(cap_id, host_msgs),
             Message::OfflineGap(cap_id, gap) => self.offline_gap(cap_id, gap),
@@ -403,13 +398,7 @@ impl Sniffer {
             }
         };
 
-        let footer = footer(
-            self.thumbnail,
-            language,
-            color_gradient,
-            self.newer_release_available,
-            &self.dots_pulse,
-        );
+        let footer = footer(self.thumbnail, color_gradient, &self.dots_pulse);
 
         let content: Element<Message, StyleType> =
             Column::new().push(header).push(body).push(footer).into();
@@ -475,7 +464,6 @@ impl Sniffer {
         let previews_task = self.start_traffic_previews();
         Task::batch([
             Sniffer::register_sigint_handler(),
-            Task::perform(set_newer_release_status(), Message::SetNewerReleaseStatus),
             previews_task,
             self.load_ip_blacklist(self.conf.settings.ip_blacklist.clone()),
         ])
@@ -813,10 +801,6 @@ impl Sniffer {
             let new = scale_factor + delta;
             self.change_scale_factor(new);
         }
-    }
-
-    fn set_newer_release_status(&mut self, status: Option<bool>) {
-        self.newer_release_available = status;
     }
 
     fn set_pcap_import(&mut self, path: String) {

@@ -1,36 +1,5 @@
 use crate::Language;
 
-pub fn new_version_available_translation(language: Language) -> &'static str {
-    match language {
-        Language::EN => "A newer version is available!",
-        Language::CS => "Je k dispozici novější verze!",
-        Language::IT => "Una versione più recente è disponibile!",
-        Language::RU => "Новая версия доступна!",
-        Language::EL => "Μια νεότερη έκδοση είναι διαθέσιμη!",
-        // Language::FA => "یک نسخه جدیدتر روی GitHub موجود است",
-        Language::SV => "En nyare version finns tillgänglig!",
-        Language::FI => "Uudempi versio saatavilla!",
-        Language::DE => "Eine neue Version ist verfügbar!",
-        Language::TR => "Daha yeni bir versiyon mevcut!",
-        Language::ES => "Hay una nueva versión disponible!",
-        Language::KO => "새로운 버전이 출시되었습니다!",
-        Language::ZH => "新版本已在 Github 发布!",
-        Language::ZH_TW => "有可用的新版本！",
-        Language::UK => "Нова версія доступна!",
-        Language::RO => "O versiune nouă este disponibilă!",
-        Language::PL => "Nowsza wersja jest dostępna!",
-        Language::FR => "Une nouvelle version est disponible!",
-        Language::JA => "新しいバージョンが利用可能になりました!",
-        Language::UZ => "Yangi versiya mavjud!",
-        Language::PT => "Uma nova versão está disponível!",
-        Language::VI => "Phiên bản mới đã sẵn sàng!",
-        Language::ID => "Versi baru tersedia!",
-        Language::NL => "Een nieuwere versie is beschikbaar!",
-        Language::HU => "Elérhető egy újabb verzió!",
-        Language::SI => "අලුත් අප්ඩේට් එකක් ඇවිත්!",
-    }
-}
-
 pub fn inspect_translation(language: Language) -> &'static str {
     match language {
         Language::EN => "Inspect",
